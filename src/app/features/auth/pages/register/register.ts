@@ -40,8 +40,7 @@ export class Register {
     const registerData = this.registerModel();
     this.authService.register(registerData).subscribe({
       next: (res: any) => {
-        localStorage.setItem('access_token', JSON.stringify(res['accessToken']));
-        localStorage.setItem('refresh-token', JSON.stringify(res['refreshToken']));
+        
         alert('User Registered Successfully!');
         this.router.navigate(['/login']);
       },

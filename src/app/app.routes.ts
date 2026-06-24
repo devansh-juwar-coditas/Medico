@@ -11,4 +11,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('../app/features/auth/auth.routes').then((route) => route.authRoutes),
   },
+  {
+    path: 'patient',
+    loadChildren: () =>
+      import('../app/features/patient/patient.routes').then((route) => route.patientRoutes),
+  },
 ];

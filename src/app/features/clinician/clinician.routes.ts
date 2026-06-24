@@ -5,7 +5,7 @@ import { clinicianGuard } from '../../guards/clinician-guard';
 export const clinicianRoutes: Routes = [
   {
     path: '',
-    canActivate: [clinicianGuard],
+    // canActivate: [clinicianGuard],
     component: Clinician,
   },
 ];

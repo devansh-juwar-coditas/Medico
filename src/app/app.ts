@@ -22,5 +22,6 @@ export class App implements OnInit {
         console.log(err);
       },
     });
+    console.log(Date.now());
   }
 }

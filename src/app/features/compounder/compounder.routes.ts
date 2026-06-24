@@ -5,7 +5,7 @@ import { coordinatorGuard } from "../../guards/coordinator-guard";
 export const compounderRoutes : Routes = [
   {
     path : '',
-    canActivate : [coordinatorGuard],
+    // canActivate : [coordinatorGuard],
     component : Compounder
   }
 ]

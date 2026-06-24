@@ -1,0 +1,32 @@
+<div class="login-container">
+  <app-landing-header></app-landing-header>
+  <main class="main">
+    <section class="content">
+      <h1 class="heading"><span class="first-letter"> H </span>ealth</h1>
+      <h1 class="heading"><span class="first-letter">I</span>s</h1>
+      <h1 class="heading"><span class="first-letter">W</span>ealth</h1>
+      <p class="description">Your Health is our Wealth</p>
+    </section>
+    <section class="login-section">
+      <div class="login-card">
+        <h2>Welcome Back!</h2>
+        <p class="msg">Enter your email and password to continue</p>
+        <form (submit)="onSubmit($event)">
+          <label>
+            Email :
+            <input type="email" placeholder="Enter your email" [formField]="loginForm.email" />
+          </label>
+          <label>
+            Password :
+            <input
+              type="password"
+              placeholder="Enter your password here"
+              [formField]="loginForm.password"
+            />
+          </label>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>

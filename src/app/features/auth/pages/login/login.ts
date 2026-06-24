@@ -2,10 +2,12 @@ import { Component, signal } from '@angular/core';
 import { ILogin } from '../../../../interfaces/login/login';
 import { email, form, required, FormField } from '@angular/forms/signals';
 import { LandingHeader } from "../../../../layout/header/landing-header/landing-header";
+import { LandingMain } from "../../../../layout/landing/landing-main/landing-main";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-login',
-  imports: [LandingHeader, FormField],
+  imports: [LandingHeader, FormField, LandingMain, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })

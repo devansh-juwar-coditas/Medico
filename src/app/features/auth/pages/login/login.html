@@ -1,12 +1,7 @@
 <div class="login-container">
   <app-landing-header></app-landing-header>
   <main class="main">
-    <section class="content">
-      <h1 class="heading"><span class="first-letter"> H </span>ealth</h1>
-      <h1 class="heading"><span class="first-letter">I</span>s</h1>
-      <h1 class="heading"><span class="first-letter">W</span>ealth</h1>
-      <p class="description">Your Health is our Wealth</p>
-    </section>
+    <app-landing-main></app-landing-main>
     <section class="login-section">
       <div class="login-card">
         <h2>Welcome Back!</h2>
@@ -26,6 +21,7 @@
           </label>
           <button type="submit">Login</button>
         </form>
+        <p class="register-btn">Don't' have an account? <a routerLink="/register">Register</a></p>
       </div>
     </section>
   </main>

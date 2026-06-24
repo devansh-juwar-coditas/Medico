@@ -16,4 +16,16 @@ export const routes: Routes = [
     loadChildren: () =>
       import('../app/features/patient/patient.routes').then((route) => route.patientRoutes),
   },
+  {
+    path: 'compounder',
+    loadChildren: () =>
+      import('../app/features/compounder/compounder.routes').then(
+        (route) => route.compounderRoutes,
+      ),
+  },
+  {
+    path: 'clinician',
+    loadChildren: () =>
+      import('../app/features/clinician/clinician.routes').then((route) => route.clinicianRoutes),
+  },
 ];

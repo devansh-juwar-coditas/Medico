@@ -5,8 +5,12 @@ import { inject, Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  user = signal('');
+  user = signal<any>({});
+  role = signal<string>('');
   readonly http = inject(HttpClient);
+  setRole(data: string) {
+    this.role.set(data);
+  }
   getUser() {
     return this.http.get('https://xhkrpfff-7000.inc1.devtunnels.ms/auth/me');
   }

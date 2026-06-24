@@ -10,13 +10,7 @@ import { UserService } from '../../../../services/user-service';
 export class Patient implements OnInit {
   readonly userService = inject(UserService);
   ngOnInit(): void {
-    this.userService.getUser().subscribe({
-      next: (res: any) => {
-        console.log(res);
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
+    const role = this.userService.role();
+    console.log(role);
   }
 }

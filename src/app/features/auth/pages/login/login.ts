@@ -3,8 +3,9 @@ import { ILogin } from '../../../../interfaces/login/login';
 import { email, form, required, FormField } from '@angular/forms/signals';
 import { LandingHeader } from '../../../../layout/header/landing-header/landing-header';
 import { LandingMain } from '../../../../layout/landing/landing-main/landing-main';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../services/auth-service';
+import { UserService } from '../../../../services/user-service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ import { AuthService } from '../../../../services/auth-service';
 })
 export class Login {
   readonly authService = inject(AuthService);
-
+  readonly userService = inject(UserService);
+  readonly router = inject(Router);
   loginModel = signal<ILogin>({
     email: '',
     password: '',
@@ -30,15 +32,27 @@ export class Login {
       message: 'Password is required!',
     });
   });
+  getUser() {
+    this.userService.getUser().subscribe({
+      next: (res: any) => {
+        console.log(res);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
   onSubmit(e: Event) {
     e.preventDefault();
     const loginData = this.loginModel();
     this.authService.login(loginData).subscribe({
       next: (res: any) => {
-        localStorage.setItem('access_token', JSON.stringify(res['accessToken']));
-        localStorage.setItem('refresh-token', JSON.stringify(res['refreshToken']));
+        localStorage.setItem('access_token', res['accessToken']);
+        localStorage.setItem('refresh-token', res['refreshToken']);
 
         alert('Login Successful');
+        this.getUser();
+        this.router.navigate(['/patient']);
       },
       error: (err: any) => {
         console.log(err);

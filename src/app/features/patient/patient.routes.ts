@@ -1,9 +1,11 @@
-import { Routes } from "@angular/router";
-import { Patient } from "./pages/patient/patient";
+import { Routes } from '@angular/router';
+import { Patient } from './pages/patient/patient';
+import { patientGuard } from '../../guards/patient-guard';
 
-export const patientRoutes : Routes = [
+export const patientRoutes: Routes = [
   {
-    path : '',
-    component : Patient
-  }
-]
+    path: '',
+    canActivate: [patientGuard],
+    component: Patient,
+  },
+];

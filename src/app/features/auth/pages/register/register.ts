@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { LandingHeader } from '../../../../layout/header/landing-header/landing-header';
 import { LandingMain } from '../../../../layout/landing/landing-main/landing-main';
 import { IRegister } from '../../../../interfaces/register/register';
 import { email, form, required, FormField } from '@angular/forms/signals';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../../services/auth-service';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,9 @@ import { RouterLink } from "@angular/router";
   styleUrl: './register.scss',
 })
 export class Register {
+  readonly authService = inject(AuthService);
+  readonly router = inject(Router);
+
   registerModel = signal<IRegister>({
     email: '',
     password: '',
@@ -31,5 +35,19 @@ export class Register {
       message: 'Name is required!',
     });
   });
-  onSubmit(e: Event) {}
+  onSubmit(e: Event) {
+    e.preventDefault();
+    const registerData = this.registerModel();
+    this.authService.register(registerData).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('access_token', JSON.stringify(res['accessToken']));
+        localStorage.setItem('refresh-token', JSON.stringify(res['refreshToken']));
+        alert('User Registered Successfully!');
+        this.router.navigate(['/login']);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
 }

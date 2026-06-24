@@ -25,7 +25,7 @@
         form {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          // gap: 1.25rem;
           input {
             padding: 1rem;
             border-radius: toRem(12);
@@ -49,6 +49,11 @@
             &:hover {
               background-color: #235bd3;
             }
+          }
+          .error-list {
+            margin: 0.5rem;
+            color: red;
+            font-size: 0.75em;
           }
         }
       }

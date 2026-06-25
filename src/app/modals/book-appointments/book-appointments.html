@@ -20,9 +20,15 @@
       </label>
       <label>
         Doctor Name :
-        <input type="text" value="Dr. Morgan" disabled />
+        <select (change)="onChange($event)">
+          <option value="">Select doctor</option>
+          @for (clinician of clinicians(); track clinician.id) {
+            <option>{{ clinician.name }}</option>
+          }
+        </select>
       </label>
       <button type="submit">Book Appointment</button>
+      <button (click)="closeDialog()">Cancel</button>
     </form>
   </div>
 </div>

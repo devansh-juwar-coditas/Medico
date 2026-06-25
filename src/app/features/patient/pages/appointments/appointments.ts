@@ -34,18 +34,6 @@ export class Appointments implements OnInit {
     const dialogRef = this.dialog.open(BookAppointments, {
       disableClose: true,
     });
-    dialogRef.closed.subscribe((result: any) => {
-      if (!result) {
-        return;
-      }
-      this.appointmentService.bookAppointment(result).subscribe({
-        next: (res: any) => {
-          console.log(res);
-        },
-        error: (err: any) => {
-          console.error(err);
-        },
-      });
-    });
+ 
   }
 }

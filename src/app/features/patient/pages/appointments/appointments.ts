@@ -58,6 +58,7 @@ export class Appointments implements OnInit {
     this.appointmentService.checkInPatient(id).subscribe({
       next: (res: any) => {
         console.log(res);
+        this.loadAppointments();
       },
       error: (err: any) => {
         console.log(err);

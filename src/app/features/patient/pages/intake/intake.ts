@@ -39,21 +39,25 @@ export class Intake implements OnInit {
   }
   submitIntake(e: Event) {
     e.preventDefault();
-    const data = this.intakeModel();
-    if (!data) {
+    const intakeData = this.intakeModel();
+    if (!intakeData) {
       return;
     }
-    const answers: Record<string, string> = {};
-    if (data.props1) {
-      answers['props1'] = data.props1;
+    if (!intakeData.props1 || !intakeData.props2 || !intakeData.props3) {
+      return;
     }
-    if (data.props2) {
-      answers['props2'] = data.props2;
-    }
-    if (data.props3) {
-      answers['props3'] = data.props3;
-    }
-    
-    
+    const answers = {
+      answers: {
+        ...intakeData,
+      },
+    };
+    this.appointmentService.completeIntake(answers, this.appointmentId()).subscribe({
+      next: (res: any) => {
+        console.log(res);
+      },
+      error: (err: any) => {
+        console.error(err);
+      },
+    });
   }
 }

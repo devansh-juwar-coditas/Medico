@@ -30,6 +30,7 @@ export interface IPatient {
 }
 
 export interface IIntake {
+  status : string,
   answers: {
     props1: string;
     props2: string;

@@ -37,7 +37,10 @@
                 }
               }
 
-              <!-- @if(appointment.status === '') -->
+              @if (appointment.status === 'CALLED') {
+                <p>You will be called by the doctor</p>
+              }
+              @if (appointment.status === 'COMPLETED') {}
             </td>
           </tr>
         }

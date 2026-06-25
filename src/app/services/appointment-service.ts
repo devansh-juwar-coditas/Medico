@@ -21,5 +21,13 @@ export class AppointmentService {
   checkInPatient(id: string) {
     return this.http.post(`${environment.baseUrl}/appointments/${id}/check-in`, {});
   }
-  
+  completeIntake(data: any, id: string) {
+    return this.http.post(`${environment.baseUrl}/appointments/${id}/intake`, data);
+  }
+  callPatient(id: string) {
+    return this.http.post(`${environment.baseUrl}/appointments/${id}/call`, {});
+  }
+  completeAppointment(id: string) {
+    return this.http.post(`${environment.baseUrl}/appointments/${id}/complete`, {});
+  }
 }

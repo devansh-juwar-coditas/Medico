@@ -1,0 +1,28 @@
+<div class="book-appointment-container">
+  <div class="modal">
+    <h2>Book Appointment</h2>
+    <form (submit)="onBook($event)">
+      <label>
+        Date of Appointment :
+        <input
+          type="date"
+          placeholder="Select the date"
+          [formField]="bookAppointmentForm.scheduledFor"
+        />
+      </label>
+      <label>
+        Reason :
+        <input
+          type="text"
+          placeholder="Specify your reason to visit"
+          [formField]="bookAppointmentForm.reason"
+        />
+      </label>
+      <label>
+        Doctor Name :
+        <input type="text" value="Dr. Morgan" disabled />
+      </label>
+      <button type="submit">Book Appointment</button>
+    </form>
+  </div>
+</div>

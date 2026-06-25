@@ -66,5 +66,16 @@ export class Appointments implements OnInit {
     });
   }
 
-  cancel(id: string) {}
+  cancel(id: string) {
+    this.appointmentService.cancelAppointment(id).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.loadAppointments();
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.loadAppointments();
+      },
+    });
+  }
 }

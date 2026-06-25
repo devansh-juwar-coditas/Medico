@@ -9,7 +9,7 @@ export interface IAppointments {
   updatedAt: string;
   patient: IPatient;
   clinician: IClinicians;
-  intake: string | null;
+  intake: IIntake | null;
 }
 export interface IBookAppointment {
   scheduledFor: string;
@@ -30,7 +30,7 @@ export interface IPatient {
 }
 
 export interface IIntake {
-  status : string,
+  status: string | null;
   answers: {
     props1: string;
     props2: string;

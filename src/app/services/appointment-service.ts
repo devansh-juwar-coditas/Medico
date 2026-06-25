@@ -30,4 +30,7 @@ export class AppointmentService {
   completeAppointment(id: string) {
     return this.http.post(`${environment.baseUrl}/appointments/${id}/complete`, {});
   }
+  cancelAppointment(id: string) {
+    return this.http.post(`${environment.baseUrl}/appointments/${id}/cancel`, {});
+  }
 }

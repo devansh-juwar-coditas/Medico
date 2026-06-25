@@ -26,15 +26,13 @@
                     >Complete Intake</a
                   >
                 }
-                @if (appointment.intake !== null) {
-                  <button class="action-btn checkin-btn" (click)="checkIn(appointment.id)">
-                    Check-In
-                  </button>
-                  <button class="action-btn reschedule-btn">Reschedule</button>
-                  <button class="action-btn cancel-btn" (click)="cancel(appointment.id)">
-                    Cancel
-                  </button>
-                }
+                <button class="action-btn reschedule-btn">Reschedule</button>
+                <button class="action-btn cancel-btn" (click)="cancel(appointment.id)">
+                  Cancel
+                </button>
+              }
+              @if (appointment.status === 'CHECKED_IN') {
+                <p>You are checked-in. Please wait! The doctor will call you</p>
               }
 
               @if (appointment.status === 'CALLED') {

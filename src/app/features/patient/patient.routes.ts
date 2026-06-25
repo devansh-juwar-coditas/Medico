@@ -4,6 +4,7 @@ import { patientGuard } from '../../guards/patient-guard';
 import { Appointments } from './pages/appointments/appointments';
 import { Queue } from './pages/queue/queue';
 import { BookAppointments } from '../../modals/book-appointments/book-appointments';
+import { Intake } from './pages/intake/intake';
 
 export const patientRoutes: Routes = [
   {
@@ -26,6 +27,10 @@ export const patientRoutes: Routes = [
       {
         path: 'appointments/book-appointment',
         component: Appointments,
+      },
+      {
+        path: 'appointments/:id/intake',
+        component: Intake,
       },
     ],
   },

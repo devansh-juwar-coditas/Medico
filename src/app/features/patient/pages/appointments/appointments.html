@@ -3,5 +3,45 @@
     <h2>My Appointments</h2>
     <button (click)="bookAppointments()">+ Book</button>
   </div>
-  
+  <div class="appointments-table">
+    <table>
+      <thead>
+        <th>Reason</th>
+        <th>Date & Time</th>
+        <th>Doctor</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        @for (appointment of appointments(); track appointment.id) {
+          <tr>
+            <td>{{ appointment.reason }}</td>
+            <td>{{ appointment.scheduledFor }}</td>
+            <td>{{ appointment.clinician['name'] }}</td>
+            <td>{{ appointment.status }}</td>
+            <td class="actions">
+              @if (appointment.status === 'BOOKED') {
+                @if (appointment.intake === null) {
+                  <a [routerLink]="[`/patient/appointments/${appointment.id}/intake`]"
+                    >Complete Intake</a
+                  >
+                }
+                @if (appointment.intake !== null) {
+                  <button class="action-btn checkin-btn" (click)="checkIn(appointment.id)">
+                    Check-In
+                  </button>
+                  <button class="action-btn reschedule-btn">Reschedule</button>
+                  <button class="action-btn cancel-btn" (click)="cancel(appointment.id)">
+                    Cancel
+                  </button>
+                }
+              }
+
+              <!-- @if(appointment.status === '') -->
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>

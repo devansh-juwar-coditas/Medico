@@ -1,6 +1,6 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IBookAppointment, IClinicians } from '../../interfaces/appointments';
+import { IAppointments, IBookAppointment, IClinicians } from '../../interfaces/appointments';
 import { form, required, FormField } from '@angular/forms/signals';
 import { clinicianId } from '../../shared/environment';
 import { AppointmentService } from '../../services/appointment-service';
@@ -14,10 +14,12 @@ import { Router } from '@angular/router';
 })
 export class BookAppointments implements OnInit {
   readonly dialogRef = inject(DialogRef);
-  readonly router = inject(Router)
+  readonly router = inject(Router);
 
   clinicians = signal<IClinicians[]>([]);
   doctor = signal<string>('');
+  isBooking = signal<boolean>(false);
+  
   readonly appointmentService = inject(AppointmentService);
   ngOnInit(): void {
     this.appointmentService.getAllClinicians().subscribe({
@@ -50,6 +52,7 @@ export class BookAppointments implements OnInit {
 
   onBook(e: Event) {
     e.preventDefault();
+    this.isBooking.set(true);
     const bookedData = this.bookAppointmentModel();
     const clinician: any = this.clinicians().filter((current) => current.name === this.doctor());
     if (!clinician) {
@@ -65,15 +68,18 @@ export class BookAppointments implements OnInit {
     this.appointmentService.bookAppointment(data).subscribe({
       next: (res: any) => {
         console.log(res);
+        this.isBooking.set(false);
+        
       },
       error: (err: any) => {
         console.error(err);
+        this.isBooking.set(false);
       },
     });
   }
 
   closeDialog() {
     this.dialogRef.close();
-    this.router.navigate(['/patient/appointments'])
+    this.router.navigate(['/patient/appointments']);
   }
 }

@@ -1,0 +1,37 @@
+<div class="intake-container">
+  <div class="intake-header">
+    <h2>Complete Intake</h2>
+  </div>
+  <form (submit)="submitIntake($event)">
+    <label>
+      Props 1 :
+      <textarea
+        rows="4"
+        cols="50"
+        id=""
+        placeholder="Enter your props here..."
+        [formField]="intakeForm.props1"
+      >
+      </textarea>
+    </label>
+    <label>
+      Props 2 :
+      <textarea
+        rows="4"
+        cols="50"
+        placeholder="Enter your props here..."
+        [formField]="intakeForm.props2"
+      ></textarea>
+    </label>
+    <label>
+      Props 3 :
+      <textarea
+        rows="4"
+        cols="50"
+        placeholder="Enter your props here..."
+        [formField]="intakeForm.props3"
+      ></textarea>
+    </label>
+    <button type="submit">Submit Intake</button>
+  </form>
+</div>

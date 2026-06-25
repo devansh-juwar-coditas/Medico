@@ -14,4 +14,12 @@ export class AppointmentService {
   getAllClinicians() {
     return this.http.get<IClinicians[]>(`${environment.baseUrl}/clinicians`);
   }
+
+  getAllAppointments() {
+    return this.http.get(`${environment.baseUrl}/appointments`);
+  }
+  checkInPatient(id: string) {
+    return this.http.post(`${environment.baseUrl}/appointments/${id}/check-in`, {});
+  }
+  
 }

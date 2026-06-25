@@ -27,7 +27,9 @@
           }
         </select>
       </label>
-      <button type="submit">Book Appointment</button>
+      <button type="submit">
+        {{ isBooking() ? 'Booking...' : 'Confirm Booking' }}
+      </button>
       <button (click)="closeDialog()">Cancel</button>
     </form>
   </div>

@@ -1,1 +1,13 @@
-<p>patient works!</p>
+<div class="patient-container">
+  <app-landing-header></app-landing-header>
+  <main class="main">
+    <aside class="patient-aside">
+      <a routerLink="/patient/appointments">Appointments</a>
+      <a routerLink="/patient/queue">Queue</a>
+      <div class="logout-btn">
+        <button type="button" (click)="logout()">Logout</button>
+      </div>
+    </aside>
+    <main class="main"></main>
+  </main>
+</div>

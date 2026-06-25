@@ -1,4 +1,8 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth-guard';
+import { patientGuard } from './guards/patient-guard';
+import { coordinatorGuard } from './guards/coordinator-guard';
+import { clinicianGuard } from './guards/clinician-guard';
 
 export const routes: Routes = [
   {
@@ -13,11 +17,13 @@ export const routes: Routes = [
   },
   {
     path: 'patient',
+    canActivate: [authGuard, patientGuard],
     loadChildren: () =>
       import('../app/features/patient/patient.routes').then((route) => route.patientRoutes),
   },
   {
     path: 'compounder',
+    canActivate: [authGuard, coordinatorGuard],
     loadChildren: () =>
       import('../app/features/compounder/compounder.routes').then(
         (route) => route.compounderRoutes,
@@ -25,6 +31,7 @@ export const routes: Routes = [
   },
   {
     path: 'clinician',
+    canActivate: [authGuard, clinicianGuard],
     loadChildren: () =>
       import('../app/features/clinician/clinician.routes').then((route) => route.clinicianRoutes),
   },

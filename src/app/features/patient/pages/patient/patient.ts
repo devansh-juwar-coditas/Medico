@@ -1,16 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../../../services/user-service';
+import { LandingHeader } from '../../../../layout/header/landing-header/landing-header';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
-  imports: [],
+  imports: [LandingHeader, RouterLink],
   templateUrl: './patient.html',
   styleUrl: './patient.scss',
 })
-export class Patient implements OnInit {
-  readonly userService = inject(UserService);
-  ngOnInit(): void {
-    const role = this.userService.role();
-    console.log(role);
-  }
+export class Patient {
+  logout() {}
 }

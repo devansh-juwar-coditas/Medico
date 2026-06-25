@@ -35,12 +35,24 @@ export class Login {
   getUser() {
     this.userService.getUser().subscribe({
       next: (res: any) => {
-        console.log(res);
+        localStorage.setItem('role', res['role']);
+        localStorage.setItem('currentUser', JSON.stringify(res));
       },
       error: (err: any) => {
-        console.log(err);
+        console.error(err);
       },
     });
+  }
+  navigate(role: string) {
+    if (role === 'PATIENT') {
+      this.router.navigate(['/patient']);
+    } else if (role === 'COORDINATOR') {
+      this.router.navigate(['/compounder']);
+    } else if (role === 'CLINICIAN') {
+      this.router.navigate(['/clinician']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
   onSubmit(e: Event) {
     e.preventDefault();
@@ -52,10 +64,14 @@ export class Login {
 
         alert('Login Successful');
         this.getUser();
-        this.router.navigate(['/patient']);
+        const role = localStorage.getItem('role');
+        if (!role) {
+          return;
+        }
+        this.navigate(role);
       },
       error: (err: any) => {
-        console.log(err);
+        console.error(err);
       },
     });
   }

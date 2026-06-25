@@ -4,7 +4,8 @@ import { UserService } from '../services/user-service';
 
 export const coordinatorGuard: CanActivateFn = (route, state) => {
   const userService = inject(UserService);
-  const role = userService.role();
+  // const role = userService.role();
+  const role = localStorage.getItem('role');
   const router = inject(Router);
   console.log('Role : ', role);
 

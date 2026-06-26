@@ -37,3 +37,18 @@ export interface IIntake {
     props3: string;
   };
 }
+
+export interface IQueueInterface {
+  clinician: IClinicians;
+  clinicianId: string;
+  id: string;
+  intake: {
+    status: string;
+  };
+  patient: IPatient;
+  patientId: string;
+  scheduledFor: string;
+  reason: string;
+  updatedAt: string;
+  status: string;
+}

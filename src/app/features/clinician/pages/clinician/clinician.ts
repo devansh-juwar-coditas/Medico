@@ -1,9 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LandingHeader } from '../../../../layout/header/landing-header/landing-header';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-clinician',
-  imports: [],
+  imports: [LandingHeader, RouterLink, RouterOutlet],
   templateUrl: './clinician.html',
   styleUrl: './clinician.scss',
 })
-export class Clinician {}
+export class Clinician {
+  readonly router = inject(Router);
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+}

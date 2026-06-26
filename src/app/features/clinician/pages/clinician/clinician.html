@@ -1,1 +1,14 @@
-<p>clinician works!</p>
+<div class="clinician-container">
+  <app-landing-header></app-landing-header>
+  <main class="main">
+    <aside class="clinician-aside">
+      <a routerLink="/clinician/queue">My Queue</a>
+      <div class="logout-btn">
+        <button type="button" (click)="logout()">Logout</button>
+      </div>
+    </aside>
+    <section class="clinician-section">
+      <router-outlet />
+    </section>
+  </main>
+</div>

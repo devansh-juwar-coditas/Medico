@@ -1,0 +1,48 @@
+<div class="queue-container">
+  <div class="queue-header">
+    <h2>My Queue</h2>
+    <button (click)="loadQueue()">Refresh</button>
+  </div>
+  <div class="queue-table">
+    <table>
+      <thead>
+        <th>Patient Position</th>
+        <th>Patient Name</th>
+        <th>Reason of Visit</th>
+        <th>Intake Status</th>
+        <th>Current Status</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        @for (queueItem of queueData(); track queueItem.id) {
+          <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ queueItem.patient['name'] }}</td>
+            <td>{{ queueItem.reason }}</td>
+            <td>{{ queueItem.intake['status'] }}</td>
+            <td>{{ queueItem.status }}</td>
+            <td>
+              @if (queueItem.status === 'CHECKED_IN') {
+                <button
+                  (click)="callPatient(queueItem.id)"
+                  [disabled]="callingId() === queueItem.id"
+                >
+                  {{ callingId() === queueItem.id ? 'CALLING' : 'CALL' }}
+                </button>
+              }
+              @if (queueItem.status === 'CALLED') {
+                <button
+                  (click)="startVisit(queueItem.id)"
+                  [disabled]="callingId() === queueItem.id"
+                >
+                  {{ callingId() === queueItem.id ? 'Starting visit' : 'Visit' }}
+                </button>
+              }
+              @if (queueItem.status === 'IN_VISIT') {}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

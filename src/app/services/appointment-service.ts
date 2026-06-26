@@ -38,4 +38,7 @@ export class AppointmentService {
 
     return this.http.post(`${environment.baseUrl}/appointments/${id}/reschedule`, { scheduledFor });
   }
+  visit(id: string) {
+    return this.http.post(`${environment.baseUrl}/appointments/${id}/start`, {});
+  }
 }

@@ -33,4 +33,9 @@ export class AppointmentService {
   cancelAppointment(id: string) {
     return this.http.post(`${environment.baseUrl}/appointments/${id}/cancel`, {});
   }
+  rescheduleAppointment(id: string, scheduleFor: { scheduleFor: string }) {
+    const scheduledFor = new Date(scheduleFor.scheduleFor).toISOString();
+
+    return this.http.post(`${environment.baseUrl}/appointments/${id}/reschedule`, { scheduledFor });
+  }
 }

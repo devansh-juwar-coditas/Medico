@@ -4,10 +4,11 @@ import { BookAppointments } from '../../../../modals/book-appointments/book-appo
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AppointmentService } from '../../../../services/appointment-service';
 import { IAppointments, IBookAppointment } from '../../../../interfaces/appointments';
+import { form, required, FormField } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-appointments',
-  imports: [RouterLink],
+  imports: [RouterLink, FormField],
   templateUrl: './appointments.html',
   styleUrl: './appointments.scss',
 })
@@ -16,6 +17,13 @@ export class Appointments implements OnInit {
   readonly route = inject(ActivatedRoute);
   readonly router = inject(Router);
   readonly appointmentService = inject(AppointmentService);
+  showRescheduleForm = signal('');
+  rescheduleModel = signal({ scheduleFor: '' });
+  rescheduleForm = form(this.rescheduleModel, (path) => {
+    required(path.scheduleFor, {
+      message: 'Date is required!',
+    });
+  });
   appointments = signal<IAppointments[]>([]);
   isLoading = signal<boolean>(false);
 
@@ -50,6 +58,7 @@ export class Appointments implements OnInit {
       },
       error: (err: any) => {
         console.log(err);
+        this.isLoading.set(false);
       },
     });
   }
@@ -59,9 +68,11 @@ export class Appointments implements OnInit {
       next: (res: any) => {
         console.log(res);
         this.loadAppointments();
+        this.isLoading.set(false);
       },
       error: (err: any) => {
         console.log(err);
+        this.isLoading.set(false);
       },
     });
   }
@@ -71,10 +82,37 @@ export class Appointments implements OnInit {
       next: (res: any) => {
         console.log(res);
         this.loadAppointments();
+        this.isLoading.set(false);
       },
       error: (err: any) => {
         console.error(err);
         this.loadAppointments();
+        this.isLoading.set(false);
+      },
+    });
+  }
+
+  toggleReschedule(id: string) {
+    if (this.showRescheduleForm()) {
+      this.showRescheduleForm.set('');
+      this.rescheduleModel.set({ scheduleFor: '' });
+    } else {
+      this.showRescheduleForm.set(id);
+      this.rescheduleModel.set({ scheduleFor: '' });
+    }
+  }
+
+  onReschedule(e: Event) {
+    e.preventDefault();
+    const id = this.showRescheduleForm();
+    const scheduleDate = this.rescheduleModel();
+    this.appointmentService.rescheduleAppointment(id, scheduleDate).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.loadAppointments();
+      },
+      error: (err: any) => {
+        console.log(err);
       },
     });
   }

@@ -26,19 +26,44 @@
                     >Complete Intake</a
                   >
                 }
-                <button class="action-btn reschedule-btn">Reschedule</button>
+                @if (appointment.intake !== null) {
+                  <button (click)="checkIn(appointment.id)">
+                    {{ isLoading() ? 'Checking-in...' : 'Check-in' }}
+                  </button>
+                }
+                <button
+                  class="action-btn reschedule-btn"
+                  (click)="toggleReschedule(appointment.id)"
+                >
+                  {{ isLoading() ? 'Rescheduling...' : 'Reschedule' }}
+                </button>
                 <button class="action-btn cancel-btn" (click)="cancel(appointment.id)">
-                  Cancel
+                  {{ isLoading() ? 'Cancelling...' : 'Cancel' }}
                 </button>
               }
               @if (appointment.status === 'CHECKED_IN') {
-                <p>You are checked-in. Please wait! The doctor will call you</p>
+                <p>Please wait! The doctor will call you</p>
               }
 
               @if (appointment.status === 'CALLED') {
                 <p>You will be called by the doctor</p>
               }
               @if (appointment.status === 'COMPLETED') {}
+
+              @if (showRescheduleForm() === appointment.id) {
+                <form class="reschedule-form" (submit)="onReschedule($event)">
+                  <label>
+                    Date :
+                    <input
+                      type="date"
+                      placeholder="Date is required..."
+                      [formField]="rescheduleForm.scheduleFor"
+                    />
+                    <button type="submit">Reschedule</button>
+                    <button (click)="toggleReschedule(appointment.id)">Cancel</button>
+                  </label>
+                </form>
+              }
             </td>
           </tr>
         }

@@ -17,6 +17,10 @@ export const clinicianRoutes: Routes = [
         path: 'queue',
         loadComponent: () => import('./pages/queue/queue').then((component) => component.Queue),
       },
+      {
+        path: 'visit/:id',
+        loadComponent: () => import('./pages/visit/visit').then((component) => component.Visit),
+      },
     ],
   },
 ];

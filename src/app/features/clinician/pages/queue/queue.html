@@ -38,7 +38,9 @@
                   {{ callingId() === queueItem.id ? 'Starting visit' : 'Visit' }}
                 </button>
               }
-              @if (queueItem.status === 'IN_VISIT') {}
+              @if (queueItem.status === 'IN_VISIT') {
+                <button (click)="navigateVisitPage(queueItem.id)">VISITING</button>
+              }
             </td>
           </tr>
         }

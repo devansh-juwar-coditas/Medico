@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { QueueService } from '../../../../services/queue-service';
 import { IQueueInterface } from '../../../../interfaces/appointments';
 import { AppointmentService } from '../../../../services/appointment-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-queue',
@@ -12,6 +13,7 @@ import { AppointmentService } from '../../../../services/appointment-service';
 export class Queue implements OnInit {
   readonly queueService = inject(QueueService);
   readonly appointmentService = inject(AppointmentService);
+  readonly router = inject(Router);
   isLoading = signal<boolean>(false);
   queueData = signal<IQueueInterface[]>([]);
   callingId = signal<string>('');
@@ -56,5 +58,9 @@ export class Queue implements OnInit {
         this.callingId.set('');
       },
     });
+  }
+
+  navigateVisitPage(id: string) {
+    this.router.navigate([`/clinician/visit/${id}`]);
   }
 }

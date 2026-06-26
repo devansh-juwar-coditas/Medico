@@ -1,1 +1,5 @@
-<p>visit works!</p>
+<div class="visit-container">
+  <button (click)="completeVisit()" [disabled]="complete()">
+    {{ complete() ? 'Completing' : 'Complete' }}
+  </button>
+</div>

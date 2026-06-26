@@ -48,7 +48,9 @@
               @if (appointment.status === 'CALLED') {
                 <p>The doctor called you!</p>
               }
-              @if (appointment.status === 'COMPLETED') {}
+              @if (appointment.status === 'COMPLETED') {
+                <p>You can go now!</p>
+              }
 
               @if (showRescheduleForm() === appointment.id) {
                 <form class="reschedule-form" (submit)="onReschedule($event)">

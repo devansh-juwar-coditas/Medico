@@ -27,8 +27,8 @@ export class AppointmentService {
   callPatient(id: string) {
     return this.http.post(`${environment.baseUrl}/appointments/${id}/call`, {});
   }
-  completeAppointment(id: string) {
-    return this.http.post(`${environment.baseUrl}/appointments/${id}/complete`, {});
+  completeAppointment(id: string, summary: string) {
+    return this.http.post(`${environment.baseUrl}/appointments/${id}/complete`, { summary });
   }
   cancelAppointment(id: string) {
     return this.http.post(`${environment.baseUrl}/appointments/${id}/cancel`, {});
@@ -40,5 +40,8 @@ export class AppointmentService {
   }
   visit(id: string) {
     return this.http.post(`${environment.baseUrl}/appointments/${id}/start`, {});
+  }
+  getAppointmentbyId(id: string) {
+    return this.http.get(`${environment.baseUrl}/appointments/${id}`);
   }
 }
